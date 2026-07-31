@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<title>Les 20 critères d'une maison saine</title>
+<title>Maison Saine 20 Criteres</title>
 <style>:root {
   color-scheme: light dark;
   background-color: transparent !important;
@@ -863,7 +863,7 @@ svg {
   </style>
 
   <div class="viz-row hp-top">
-    <span class="viz-badge" id="hp-counter">8 points à ausculter</span>
+    <span class="viz-badge" id="hp-counter">20 critères à vérifier</span>
     <div class="hp-progress" id="hp-progress" aria-label="Progression du parcours"></div>
   </div>
 
@@ -893,8 +893,8 @@ svg {
       <span class="hp-bigicon" id="hp-icon" aria-hidden="true"></span>
     </div>
     <div class="hp-choices">
-      <button class="btn hp-choice" type="button" data-answer="2"><span>✓</span><span>Tout va bien</span></button>
-      <button class="btn hp-choice" type="button" data-answer="1"><span>?</span><span>Je ne sais pas</span></button>
+      <button class="btn hp-choice" type="button" data-answer="1"><span>✓</span><span>Oui</span></button>
+      <button class="btn hp-choice" type="button" data-answer="0"><span>?</span><span>Je ne sais pas</span></button>
       <button class="btn hp-choice" type="button" data-answer="0"><span>!</span><span>À corriger</span></button>
     </div>
   </section>
@@ -914,61 +914,140 @@ svg {
     (function () {
       const root = document.getElementById("healthy-home-photo-game");
       const topics = {
-        roof: { label:"Toiture", icon:"💧", question:"Aucune infiltration ni trace d’humidité sous la toiture?", action:"Faire rechercher l’origine des infiltrations avant de repeindre.", anomaly:"humidity" },
-        window: { label:"Fenêtre", icon:"▦", question:"Les vitres et les angles restent-ils sans condensation?", action:"Contrôler l’humidité, les ponts thermiques et le renouvellement d’air.", anomaly:"humidity" },
-        sleep: { label:"Chambre", icon:"☾", question:"L’air reste-t-il frais, calme et sombre jusqu’au matin?", action:"Mesurer le CO₂ nocturne et réduire bruit et lumière." },
-        materials: { label:"Matériaux", icon:"▧", question:"Peintures, colles et sols ont-ils été choisis pour leurs faibles émissions?", action:"Vérifier les émissions réelles des matériaux, au-delà des labels." },
-        kitchen: { label:"Cuisine", icon:"♨", question:"Vapeur et produits de combustion sont-ils rapidement évacués?", action:"Contrôler l’extraction et installer un détecteur de CO si nécessaire." },
-        air: { label:"Air intérieur", icon:"≋", question:"La ventilation fonctionne-t-elle sans devoir être coupée?", action:"Faire mesurer les débits et régler la ventilation.", anomaly:"air" },
-        technical: { label:"Entretien", icon:"⚙", question:"Filtres, conduites et interventions sont-ils accessibles et suivis?", action:"Créer un carnet d’entretien et inspecter les conduites." },
-        radon: { label:"Sous la maison", icon:"◉", question:"Le radon a-t-il déjà été mesuré?", action:"Mesurer le radon dans les niveaux en contact avec le sol.", anomaly:"radon" }
+        roof: {
+          label:"Toiture et façade", icon:"💧", anomaly:"humidity",
+          questions:[
+            { text:"La toiture et la façade sont-elles exemptes de traces d’infiltration?", action:"Faire rechercher l’origine des infiltrations avant de repeindre." },
+            { text:"Les murs restent-ils secs, y compris derrière les meubles?", action:"Contrôler les parois froides et les zones cachées." }
+          ]
+        },
+        window: {
+          label:"Fenêtres et extérieur", icon:"▦", anomaly:"humidity",
+          questions:[
+            { text:"Les vitres et les angles restent-ils sans condensation?", action:"Contrôler l’humidité, les ponts thermiques et le renouvellement d’air." },
+            { text:"Les pièces de vie sont-elles protégées du trafic et des principales nuisances?", action:"Limiter l’exposition des pièces de vie aux sources extérieures." }
+          ]
+        },
+        sleep: {
+          label:"Chambre et sommeil", icon:"☾",
+          questions:[
+            { text:"L’air de la chambre reste-t-il frais jusqu’au matin?", action:"Mesurer le CO₂ nocturne et vérifier le débit d’air." },
+            { text:"La chambre peut-elle devenir réellement calme et sombre?", action:"Réduire le bruit et les sources lumineuses nocturnes." },
+            { text:"Tableau électrique et onduleur sont-ils éloignés du lit?", action:"Éloigner les équipements électriques puissants des chambres." }
+          ]
+        },
+        materials: {
+          label:"Matériaux et finitions", icon:"▧",
+          questions:[
+            { text:"Peintures, colles et sols ont-ils été choisis pour leurs faibles émissions?", action:"Vérifier les émissions réelles des matériaux, au-delà des labels." },
+            { text:"Aucune odeur chimique ne persiste-t-elle après les travaux?", action:"Identifier la source de toute odeur chimique persistante." },
+            { text:"Les anciens matériaux ont-ils été diagnostiqués avant rénovation?", action:"Rechercher amiante, plomb, biocides et moisissures avant de démolir." }
+          ]
+        },
+        kitchen: {
+          label:"Cuisine et humidité", icon:"♨",
+          questions:[
+            { text:"La vapeur de cuisson est-elle rapidement évacuée?", action:"Contrôler l’extraction de la cuisine." },
+            { text:"Un détecteur de monoxyde de carbone protège-t-il les appareils à combustion?", action:"Installer un détecteur de CO adapté." },
+            { text:"L’humidité intérieure reste-t-elle généralement entre 40 et 60%?", action:"Mesurer l’humidité pendant plusieurs jours." }
+          ]
+        },
+        air: {
+          label:"Air et ventilation", icon:"≋", anomaly:"air",
+          questions:[
+            { text:"La ventilation fonctionne-t-elle sans devoir être coupée?", action:"Faire régler la ventilation pour un fonctionnement continu." },
+            { text:"La prise d’air neuf est-elle éloignée du trafic, des garages et des rejets?", action:"Vérifier l’emplacement de la prise d’air neuf." },
+            { text:"Les débits d’air ont-ils déjà été mesurés dans les chambres et le séjour?", action:"Faire mesurer et équilibrer les débits de ventilation." }
+          ]
+        },
+        technical: {
+          label:"Entretien technique", icon:"⚙",
+          questions:[
+            { text:"Filtres et conduites sont-ils accessibles et nettoyables?", action:"Rendre le réseau accessible à l’inspection et au nettoyage." },
+            { text:"Les changements de filtres et contrôles sont-ils consignés?", action:"Créer un carnet d’entretien de la ventilation." }
+          ]
+        },
+        radon: {
+          label:"Sol et radon", icon:"◉", anomaly:"radon",
+          questions:[
+            { text:"Le radon a-t-il déjà été mesuré?", action:"Mesurer le radon dans les niveaux en contact avec le sol." },
+            { text:"La maison dispose-t-elle d’un moyen d’évacuer le radon sous la dalle?", action:"Étudier un puisard ou une autre solution d’évacuation du radon." }
+          ]
+        }
       };
       const ids = Object.keys(topics);
       const answers = {};
       let active = null;
+      let activeQuestion = 0;
       const progress = root.querySelector("#hp-progress");
-      ids.forEach(function () {
+      const totalQuestions = ids.reduce(function (sum, id) { return sum + topics[id].questions.length; }, 0);
+      Array.from({ length: totalQuestions }).forEach(function () {
         const pip = document.createElement("span");
         progress.appendChild(pip);
       });
 
+      function answerKey(id, index) {
+        return id + "-" + index;
+      }
+
+      function topicComplete(id) {
+        return topics[id].questions.every(function (_question, index) {
+          return answers[answerKey(id, index)] !== undefined;
+        });
+      }
+
       function update() {
         const count = Object.keys(answers).length;
-        root.querySelector("#hp-counter").textContent = count === ids.length ? "Maison auscultée" : (ids.length - count) + " point" + (ids.length - count > 1 ? "s" : "") + " à ausculter";
+        root.querySelector("#hp-counter").textContent = count === totalQuestions ? "20 critères vérifiés" : count + " / " + totalQuestions + " critères";
         root.querySelectorAll(".hp-progress span").forEach(function (pip, index) {
           pip.classList.toggle("on", index < count);
         });
         root.querySelectorAll(".hp-hotspot").forEach(function (button) {
-          button.classList.toggle("done", answers[button.getAttribute("data-id")] !== undefined);
+          button.classList.toggle("done", topicComplete(button.getAttribute("data-id")));
         });
       }
 
       function openTopic(id) {
         active = id;
-        const topic = topics[id];
-        root.querySelectorAll(".hp-hotspot").forEach(function (button) {
-          button.classList.toggle("active", button.getAttribute("data-id") === id);
+        const firstUnanswered = topics[id].questions.findIndex(function (_question, index) {
+          return answers[answerKey(id, index)] === undefined;
         });
-        root.querySelector("#hp-label").textContent = topic.label;
+        activeQuestion = firstUnanswered >= 0 ? firstUnanswered : 0;
+        showQuestion();
+      }
+
+      function showQuestion() {
+        const topic = topics[active];
+        const question = topic.questions[activeQuestion];
+        root.querySelectorAll(".hp-hotspot").forEach(function (button) {
+          button.classList.toggle("active", button.getAttribute("data-id") === active);
+        });
+        root.querySelector("#hp-label").textContent = topic.label + " · " + (activeQuestion + 1) + "/" + topic.questions.length;
         root.querySelector("#hp-icon").textContent = topic.icon;
-        root.querySelector("#hp-question").textContent = topic.question;
+        root.querySelector("#hp-question").textContent = question.text;
         root.querySelector("#hp-panel").classList.add("show");
         root.querySelector("#hp-note").textContent = "Choisissez la situation qui correspond le mieux à votre logement.";
       }
 
       function finish() {
         const score = Object.values(answers).reduce(function (sum, value) { return sum + value; }, 0);
-        const weakest = ids.filter(function (id) { return answers[id] < 2; }).sort(function (a, b) { return answers[a] - answers[b]; })[0];
+        const firstIssue = ids.reduce(function (found, id) {
+          if (found) return found;
+          const index = topics[id].questions.findIndex(function (_question, questionIndex) {
+            return answers[answerKey(id, questionIndex)] === 0;
+          });
+          return index >= 0 ? { id:id, index:index } : null;
+        }, null);
         let face;
         let profile;
-        if (score >= 14) { face = "🌿"; profile = "Maison alliée"; }
-        else if (score >= 10) { face = "🙂"; profile = "Maison attentive"; }
-        else if (score >= 6) { face = "🔎"; profile = "Maison à surveiller"; }
+        if (score >= 17) { face = "🌿"; profile = "Maison alliée"; }
+        else if (score >= 13) { face = "🙂"; profile = "Maison attentive"; }
+        else if (score >= 9) { face = "🔎"; profile = "Maison à surveiller"; }
         else { face = "⚠"; profile = "Maison en alerte"; }
         root.querySelector("#hp-face").textContent = face;
-        root.querySelector("#hp-score").textContent = score + " / 16";
+        root.querySelector("#hp-score").textContent = score + " / 20";
         root.querySelector("#hp-profile").textContent = profile;
-        root.querySelector("#hp-action").textContent = "Votre premier geste: " + (weakest ? topics[weakest].action : "maintenir les contrôles et l’entretien.");
+        root.querySelector("#hp-action").textContent = "Votre premier geste: " + (firstIssue ? topics[firstIssue.id].questions[firstIssue.index].action : "maintenir les contrôles et l’entretien.");
         root.querySelector("#hp-panel").classList.remove("show");
         root.querySelector("#hp-final").classList.add("show");
         root.querySelector("#hp-scene").classList.add("finished");
@@ -981,7 +1060,7 @@ svg {
       root.querySelectorAll("[data-answer]").forEach(function (button) {
         button.addEventListener("click", function () {
           const value = Number(button.getAttribute("data-answer"));
-          answers[active] = value;
+          answers[answerKey(active, activeQuestion)] = value;
           const anomaly = topics[active].anomaly;
           if (anomaly) {
             root.querySelectorAll('[data-anomaly="' + anomaly + '"]').forEach(function (mark) {
@@ -989,7 +1068,10 @@ svg {
             });
           }
           update();
-          if (Object.keys(answers).length === ids.length) {
+          if (activeQuestion < topics[active].questions.length - 1) {
+            activeQuestion += 1;
+            showQuestion();
+          } else if (Object.keys(answers).length === totalQuestions) {
             finish();
           } else {
             root.querySelector("#hp-panel").classList.remove("show");
@@ -1001,6 +1083,7 @@ svg {
       root.querySelector("#hp-restart").addEventListener("click", function () {
         Object.keys(answers).forEach(function (key) { delete answers[key]; });
         active = null;
+        activeQuestion = 0;
         root.querySelector("#hp-final").classList.remove("show");
         root.querySelector("#hp-panel").classList.remove("show");
         root.querySelector("#hp-scene").classList.remove("finished");
