@@ -894,8 +894,8 @@ svg {
     </div>
     <div class="hp-choices">
       <button class="btn hp-choice" type="button" data-answer="1"><span>✓</span><span>Oui</span></button>
+      <button class="btn hp-choice" type="button" data-answer="0"><span>✕</span><span>Non</span></button>
       <button class="btn hp-choice" type="button" data-answer="0"><span>?</span><span>Je ne sais pas</span></button>
-      <button class="btn hp-choice" type="button" data-answer="0"><span>!</span><span>À corriger</span></button>
     </div>
   </section>
 
@@ -908,7 +908,7 @@ svg {
     <button class="btn" type="button" id="hp-restart">Recommencer</button>
   </section>
 
-  <p class="hp-note" id="hp-note">Cliquez directement dans la maison. Chaque symbole révèle un point de santé.</p>
+  <p class="hp-note" id="hp-note">Cliquez directement dans la maison. Chaque symbole révèle un point de santé. Quand vous cliquez dessus, il pose d’une à trois questions pour établir un bilan.</p>
 
   <script>
     (function () {
@@ -1089,7 +1089,7 @@ svg {
         root.querySelector("#hp-scene").classList.remove("finished");
         root.querySelectorAll(".hp-hotspot").forEach(function (button) { button.classList.remove("done", "active"); });
         root.querySelectorAll(".hp-anomaly").forEach(function (mark) { mark.classList.remove("show"); });
-        root.querySelector("#hp-note").textContent = "Cliquez directement dans la maison. Chaque symbole révèle un point de santé.";
+        root.querySelector("#hp-note").textContent = "Cliquez directement dans la maison. Chaque symbole révèle un point de santé. Quand vous cliquez dessus, il pose d’une à trois questions pour établir un bilan.";
         update();
       });
       update();
